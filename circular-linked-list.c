@@ -126,18 +126,18 @@ int initialize(listNode** h) {
 int freeList(listNode* h){
 
 	if (h->rlink == h) {	//리스트에 헤드 노드만 있는 경우
-		free(h);			//헤드 노드의 메모리를 해제
+		free(h);	//헤드 노드의 메모리를 해제
 	}
 
-	else {							//리스트에 헤드 노드 이외의 노드가 있는 경우
+	else {					//리스트에 헤드 노드 이외의 노드가 있는 경우
 		listNode* temp = h->rlink;	//temp라는 노드 선언 및 헤드 노드의 오른쪽 링크, 즉 첫번째 노드로 초기화
 		listNode* pre = NULL;		//pre라는 노드 선언 및 NULL로 초기화
 
 		while (temp != h && temp != NULL) {	//temp노드가 헤드 노드와 NULL이 아니라면 반복
 			pre = temp;			//pre노드를 temp노드로 초기화
-			temp = temp->rlink;	//temp노드를 다음 노드로 이동
+			temp = temp->rlink;		//temp노드를 다음 노드로 이동
 			free(pre);			//pre노드의 메모리를 해제
-		}						//temp를 따라서 pre노드도 한 칸씩 이동하면서 모든 메모리를 해제
+		}					//temp를 따라서 pre노드도 한 칸씩 이동하면서 모든 메모리를 해제
 		free(h);				//헤드 노드의 메모리를 해제
 	}
 
@@ -199,17 +199,17 @@ int insertLast(listNode* h, int key) {
 	}
 
 	else if (h->rlink == h) {	//리스트에 헤드 노드만 있는 경우
-		h->rlink = new;			//헤드 노드의 오른쪽 링크를 new노드로 초기화
-		h->llink = new;			//헤드 노드의 왼쪽 링크를 new노드로 초기화
-		new->rlink = h;			//new노드의 오른쪽 링크를 헤드 노드로 초기화
-		new->llink = h;			//new노드의 왼쪽 링크를 헤드 노드로 초기화
+		h->rlink = new;		//헤드 노드의 오른쪽 링크를 new노드로 초기화
+		h->llink = new;		//헤드 노드의 왼쪽 링크를 new노드로 초기화
+		new->rlink = h;		//new노드의 오른쪽 링크를 헤드 노드로 초기화
+		new->llink = h;		//new노드의 왼쪽 링크를 헤드 노드로 초기화
 	}
 
-	else {						//리스트에 헤드 노드 외의 다른 노드가 있는 경우
+	else {				//리스트에 헤드 노드 외의 다른 노드가 있는 경우
 		new->llink = h->llink;	//new노드의 왼쪽 링크를 헤드 노드의 왼쪽 링크, 즉 마지막 노드로 초기화
 		h->llink->rlink = new;	//헤드 노드의 왼쪽 링크의 오른쪽 링크, 즉 기존의 마지막 노드의 오른쪽 링크를 new노드로 초기화
-		new->rlink = h;			//new노드의 오른쪽 링크를 헤드 노드로 초기화
-		h->llink = new;			//헤드 노드의 왼쪽 링크를 new노드로 초기화
+		new->rlink = h;		//new노드의 오른쪽 링크를 헤드 노드로 초기화
+		h->llink = new;		//헤드 노드의 왼쪽 링크를 new노드로 초기화
 	}
 
 	return 1;
@@ -229,8 +229,7 @@ int deleteLast(listNode* h) {
 		listNode* temp = h->llink;	//temp라는 노드 선언 및 헤더 노드의 왼쪽 링크, 즉 마지막 노드로 초기화
 		temp->llink->rlink = h;		//temp의 왼쪽 링크의 오른쪽 링크, 즉 마지막에서 두번째 노드의 오른쪽 링크를 헤드 노드로 초기화
 		h->llink = temp->llink;		//헤드 노드의 왼쪽 링크를 temp의 왼쪽 링크로 초기화
-
-		free(temp);	//마지막 노드인 temp노드의 메모리를 해제
+		free(temp);			//마지막 노드인 temp노드의 메모리를 해제
 	}
 
 	return 1;
@@ -252,17 +251,17 @@ int insertFirst(listNode* h, int key) {
 	}
 
 	else if (h->rlink == h) {	//리스트에 헤드 노드만 있는 경우
-		h->rlink = new;			//헤드 노드의 오른쪽 링크를 new노드로 초기화
-		h->llink = new;			//헤드 노드의 왼쪽 링크를 new노드로 초기화
-		new->rlink = h;			//new노드의 오른쪽 링크를 헤드 노드로 초기화
-		new->llink = h;			//new노드의 왼쪽 링크를 헤드 노드로 초기화
+		h->rlink = new;		//헤드 노드의 오른쪽 링크를 new노드로 초기화
+		h->llink = new;		//헤드 노드의 왼쪽 링크를 new노드로 초기화
+		new->rlink = h;		//new노드의 오른쪽 링크를 헤드 노드로 초기화
+		new->llink = h;		//new노드의 왼쪽 링크를 헤드 노드로 초기화
 	}
 
-	else {						//리스트에 헤드 노드 외의 다른 노드가 있는 경우
+	else {				//리스트에 헤드 노드 외의 다른 노드가 있는 경우
 		new->rlink = h->rlink;	//new노드의 오른쪽 링크를 헤드 노드의 오른쪽 링크, 즉 첫번째 노드로 초기화
 		h->rlink->llink = new;	//헤드 노드의 오른쪽 링크의 왼쪽 링크, 즉 기존의 첫번째 노드의 왼쪽 링크를 new노드로 초기화
-		new->llink = h;			//new노드의 왼쪽 링크를 헤드 노드로 초기화
-		h->rlink = new;			//헤드 노드의 오른쪽 링크를 new노드로 초기화
+		new->llink = h;		//new노드의 왼쪽 링크를 헤드 노드로 초기화
+		h->rlink = new;		//헤드 노드의 오른쪽 링크를 new노드로 초기화
 	}
 
 	return 1;
@@ -281,6 +280,7 @@ int deleteFirst(listNode* h) {
 		listNode* temp = h->rlink;	//temp라는 노드 선언 및 헤더 노드의 오른쪽쪽 링크, 즉 첫번째 노드로 초기화
 		temp->rlink->llink = h;		//temp노드의 오른쪽 링크의 왼쪽 링크, 즉 두번째 노드의 왼쪽 링크를 헤드 노드로 초기화
 		h->rlink = temp->rlink;		//헤드 노드의 오른쪽 링크를 temp노드의 오른쪽 링크, 즉 두번째 노드로 초기화
+		free(temp);			//temp노드의 메모리를 해제
 	}
 
 	return 1;
@@ -300,7 +300,7 @@ int invertList(listNode* h) {
 	else {
 		listNode* a = h->rlink;	//a라는 노드 선언 및 헤드 노드의 오른쪽 링크, 즉 첫번째 노드로 초기화
 		listNode* b = h;		
-		listNode* c = h;		//b, c라는 노드 선언 및 헤드 노드로 초기화
+		listNode* c = h;	//b, c라는 노드 선언 및 헤드 노드로 초기화
 
 		h->llink = h->rlink;	//헤드 노드의 왼쪽 링크를 첫번째 노드로 초기화
 
@@ -323,7 +323,7 @@ int invertList(listNode* h) {
 /* 리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 */
 int insertNode(listNode* h, int key) {
 
-	if (h == NULL) {	//헤더 노드가 NULL인 경우
+	if (h == NULL) {			//헤더 노드가 NULL인 경우
 		printf("Headnode is NULL!\n");	//오류 메시지 출력
 	}
 
@@ -333,23 +333,23 @@ int insertNode(listNode* h, int key) {
 
 	else {
 		listNode* new = (listNode*)malloc(sizeof(listNode));	//입력 받은 키 값을 저장할 new라는 노드에 메모리 할당
-		new->key = key;				//new노드의 키 값을 입력 받은 키 값으로 초기화
+		new->key = key;			//new노드의 키 값을 입력 받은 키 값으로 초기화
 		new->rlink = NULL;
-		new->llink = NULL;			//new노드의 좌우 링크를 NULL로 초기화
+		new->llink = NULL;		//new노드의 좌우 링크를 NULL로 초기화
 		listNode* temp = h->rlink;	//temp라는 노드 선언 및 헤드 노드의 오른쪽 링크, 즉 첫번째 노드로 초기화
 
-		while (temp != h && temp != NULL) {	//temp노드가 헤드 노드와 NULL이 아니라면 반복
+		while (temp != h && temp != NULL) {		//temp노드가 헤드 노드와 NULL이 아니라면 반복
 			if (temp->key > key) {			//입력 받은 키 값보다 큰 값을 가진 노드를 찾은 경우
 				if (temp == h->rlink) {		//찾은 노드가 첫번재 노드인 경우
 					insertFirst(h, key);	//함수를 호출해 리스트의 맨 앞에 노드를 삽입
 				}
-				else {							//찾은 노드가 첫번째 노드가 아닌 경우
-					new->rlink = temp;			//new노드의 오른쪽 링크를 찾은 노드로 초기화
+				else {					//찾은 노드가 첫번째 노드가 아닌 경우
+					new->rlink = temp;		//new노드의 오른쪽 링크를 찾은 노드로 초기화
 					new->llink = temp->llink;	//new노드의 왼쪽 링크를 찾은 노드의 왼쪽 링크로 초기화
 					temp->llink->rlink = new;	//찾은 노드의 이전 노드의 오른쪽 링크를 new노드로 초기화
-					temp->llink = new;			//찾은 노드의 왼쪽 링크를 new노드로 초기화
+					temp->llink = new;		//찾은 노드의 왼쪽 링크를 new노드로 초기화
 				}
-				return 0;		//노드를 삽입했다면 함수 종료
+				return 0;	//노드를 삽입했다면 함수 종료
 			}
 			temp = temp->rlink;	//temp노드를 다음 노드로 이동
 		}
@@ -373,19 +373,19 @@ int deleteNode(listNode* h, int key) {
 		listNode* temp = h->rlink;	//temp라는 노드 선언 및 헤드 노드의 오른쪽 링크, 즉 첫번째 노드로 초기화
 
 		while (temp != h && temp != NULL) {		//temp노드가 헤드 노드와 NULL이 아니라면 반복
-			if (temp->key == key) {				//입력 받은 키 값을 가진 노드를 찾은 경우
-				if (temp == h->rlink) {			//찾은 노드가 첫번재 노드인 경우
+			if (temp->key == key) {			//입력 받은 키 값을 가진 노드를 찾은 경우
+				if (temp == h->rlink) {		//찾은 노드가 첫번재 노드인 경우
 					deleteFirst(h);		//함수를 호출해 리스트의 맨 앞에 노드를 삭제
 				}
 				else if (temp->rlink == h) {	//찾은 노드가 마지막 노드인 경우
-					deleteLast(h);			//함수를 호출해 리스트의 마지막 노드를 삭제
+					deleteLast(h);		//함수를 호출해 리스트의 마지막 노드를 삭제
 				}
-				else {									//찾은 노드가 첫번째 노드가 아닌 경우
+				else {						//찾은 노드가 첫번째 노드가 아닌 경우
 					temp->llink->rlink = temp->rlink;	//찾은 노드 이전 노드의 오른쪽 링크를 찾은 노드의 다음 노드로 초기화
 					temp->rlink->llink = temp->llink;	//찾은 노드 다음 노드의 왼쪽 링크를 찾은 노드의 이전 노드로 초기화
-					free(temp);							//temp노드의 메모리를 해제
+					free(temp);				//temp노드의 메모리를 해제
 				}
-				return 0;		//노드를 삭제했다면 함수 종료
+				return 0;	//노드를 삭제했다면 함수 종료
 			}
 			temp = temp->rlink;	//temp노드를 다음 노드로 이동
 		}
